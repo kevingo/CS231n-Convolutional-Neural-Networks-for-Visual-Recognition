@@ -11,7 +11,7 @@
 ![img_diff](https://raw.githubusercontent.com/kevingo/blog/master/screenshot/img_clf_diff.png)
 
 使用 Nearest Neighbor 分類器來分類影像
-- 每張測試圖片和訓練圖片進行像素之間的比較，相減之後取絕對值「相素差」加總
+- 每張測試圖片和訓練圖片進行像素之間的比較，相減之後取絕對值「相素差」加總
 - 對每一張訓練圖片做完上述計算後，取「相素差」最小的那一張圖片當做分類結果
 
 ![img_nn](https://raw.githubusercontent.com/kevingo/blog/master/screenshot/img_nn.png)
