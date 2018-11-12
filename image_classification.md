@@ -26,7 +26,13 @@
 
 ## 最近鄰居分類器
 
-As our first approach, we will develop what we call a Nearest Neighbor Classifier. This classifier has nothing to do with Convolutional Neural Networks and it is very rarely used in practice, but it will allow us to get an idea about the basic approach to an image classification problem.
+作為這門課程的第一個方法，我們來開發一個方法，叫做最近鄰居分類器。這個分類器跟卷積神經網路沒有任何關係，在實務上也極少使用，但學習它對於我們對於解決圖片分類問題會有一個基本的認識。
 
-Example image classification dataset: CIFAR-10. One popular toy image classification dataset is the CIFAR-10 dataset. This dataset consists of 60,000 tiny images that are 32 pixels high and wide. Each image is labeled with one of 10 classes (for example “airplane, automobile, bird, etc”). These 60,000 images are partitioned into a training set of 50,000 images and a test set of 10,000 images. In the image below you can see 10 random example images from each one of the 10 classes:
+**圖片分類資料集： CIFAR-10.**
+一個非常流行的圖片分類資料集叫做 CIFAR-10。這個資料集包含 60,000 張小圖，每張圖片屬於 10 個類別其中之一 (比如說飛機、汽車、鳥等等)。這 60,000 張圖片被分為 50,000 張訓練集，以及 10,000 張測試集。底下你可以看到 10 個類別與其對應隨機挑選出來的圖片：
 
+假設我們現在已經有 50,000 張 CIFAR-10 的訓練圖片資料集 (每個類別 5000 張)，我們想要預測剩下的 10,000 張圖片的類別。最近鄰居分類器會針對每一張測試圖片，去尋找跟它距離最接近的訓練圖片來給出類別。上圖的右方你可以看到這種分類器的效果。請注意上方的結果，在十個類別中只有三個類別的分類結果是正確的，另外七個是比較差的。以第八列的馬頭為例，跟它最接近的是一輛紅色的車子，原因是該張車子的圖片的背景也是全黑的，所以演算法會誤認為這是跟測試圖片很接近的訓練資料。
+
+你可能會注意到我們還沒有提到具體上我們怎麼比較這兩張 32 x 32 x 3 的圖片。一個最簡單的方法就是針對每個像素進行比較，換句話說，就是把兩張圖片用向量表示為 I1,I2，接著比較兩者的 **L1 距離：**
+
+這裡的總和指的是所有像素總和。底下是相關的圖例：
