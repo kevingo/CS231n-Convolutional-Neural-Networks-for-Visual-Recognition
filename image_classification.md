@@ -36,3 +36,55 @@
 你可能會注意到我們還沒有提到具體上我們怎麼比較這兩張 32 x 32 x 3 的圖片。一個最簡單的方法就是針對每個像素進行比較，換句話說，就是把兩張圖片用向量表示為 I1,I2，接著比較兩者的 **L1 距離：**
 
 這裡的總和指的是所有像素總和。底下是相關的圖例：
+
+讓我們來看看怎麼實作這個分類器。首先，讓我們讀取 CIFAR-10 的資料到記憶體中，並把他們儲存成四份陣列資料：訓練集/訓練的類別標籤、測試集/測試的類別標籤。底下程式碼的 `Xtr` (大小為 50,000 x 32 x 32 x 3) 儲存所有訓練資料集的圖片，而一維陣列 `Ytr` (長度為 50,000) 則儲存訓練資料級的類別標籤 (從 0 到 9)：
+
+```python
+Xtr, Ytr, Xte, Yte = load_CIFAR10('data/cifar10/') # a magic function we provide
+# flatten out all images to be one-dimensional
+Xtr_rows = Xtr.reshape(Xtr.shape[0], 32 * 32 * 3) # Xtr_rows becomes 50000 x 3072
+Xte_rows = Xte.reshape(Xte.shape[0], 32 * 32 * 3) # Xte_rows becomes 10000 x 3072
+```
+
+現在我們擁有一個所有圖片所形成的向量，底下我們就來訓練和評估分類器：
+
+```python
+nn = NearestNeighbor() # create a Nearest Neighbor classifier class
+nn.train(Xtr_rows, Ytr) # train the classifier on the training images and labels
+Yte_predict = nn.predict(Xte_rows) # predict labels on the test images
+# and now print the classification accuracy, which is the average number
+# of examples that are correctly predicted (i.e. label matches)
+print 'accuracy: %f' % ( np.mean(Yte_predict == Yte) )
+```
+
+在評估分類性能的指標上，我們經常會使用 **準確率(accuracy)** 作為衡量的基準，它代表了我們預測正確的比例有多少。要特別注意的是，往後我們建立的所有分類器都會有這個 API：`train(X,y)` 函式，用來讀取資料並且進行訓練。從內部來看，這個類別負責從類別標籤和資料訓練出一個模型。另外有一個 `predict(X)` 函式，用來針對新看到的資料進行預測。沒錯，我們省略了最重要的分類器的實作部分，底下是一個使用 L1 距離函式所建立的最近鄰居分類器：
+
+```python
+import numpy as np
+
+class NearestNeighbor(object):
+  def __init__(self):
+    pass
+
+  def train(self, X, y):
+    """ X is N x D where each row is an example. Y is 1-dimension of size N """
+    # the nearest neighbor classifier simply remembers all the training data
+    self.Xtr = X
+    self.ytr = y
+
+  def predict(self, X):
+    """ X is N x D where each row is an example we wish to predict label for """
+    num_test = X.shape[0]
+    # lets make sure that the output type matches the input type
+    Ypred = np.zeros(num_test, dtype = self.ytr.dtype)
+
+    # loop over all test rows
+    for i in xrange(num_test):
+      # find the nearest training image to the i'th test image
+      # using the L1 distance (sum of absolute value differences)
+      distances = np.sum(np.abs(self.Xtr - X[i,:]), axis = 1)
+      min_index = np.argmin(distances) # get the index with smallest distance
+      Ypred[i] = self.ytr[min_index] # predict the label of the nearest example
+
+    return Ypred
+```
