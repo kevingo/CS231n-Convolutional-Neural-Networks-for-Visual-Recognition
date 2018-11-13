@@ -88,3 +88,7 @@ class NearestNeighbor(object):
 
     return Ypred
 ```
+
+如果你執行以上的程式碼，你會看到該分類器在 CIFAR-10 上的正確率只有 38.6%。這樣的結果比起隨機猜測好得多 (大概是 10%)，但跟人類的表現 ([大約 94%](http://karpathy.github.io/2011/04/27/manually-classifying-cifar10/)) 和目前接近最好的卷積神經網路的 95% 比起來差多了 (你可以從 Kaggle 的[排行榜](http://www.kaggle.com/c/cifar-10/leaderboard)上查看目前的準確率排名)。
+
+**距離函數的選擇** 向量之間距離的計算有許多方法。另一個常見的做法是使用 **L2 距離** 函式，從幾何學的角度來看，他是計算兩個向量之間的歐式距離，定義如下：
