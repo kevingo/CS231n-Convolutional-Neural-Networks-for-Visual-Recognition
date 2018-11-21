@@ -198,7 +198,7 @@ for k in [1, 3, 5, 10, 20, 50, 100]:
 
 底下是一些額外的連結提供參考：
 
-[A Few Useful Things to Know about Machine Learning](http://homes.cs.washington.edu/~pedrod/papers/cacm12.pdf), 內容中的第六章和本次內容相關，但整份文章都值得閱讀
+- [A Few Useful Things to Know about Machine Learning](http://homes.cs.washington.edu/~pedrod/papers/cacm12.pdf), 內容中的第六章和本次內容相關，但整份文章都值得閱讀
 
-[Recognizing and Learning Object Categories](http://people.csail.mit.edu/torralba/shortCourseRLOC/index.html), ICCV 2005 上關於物件分類的內容
+- [Recognizing and Learning Object Categories](http://people.csail.mit.edu/torralba/shortCourseRLOC/index.html), ICCV 2005 上關於物件分類的內容
 
