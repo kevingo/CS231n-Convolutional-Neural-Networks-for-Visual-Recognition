@@ -194,4 +194,11 @@ for k in [1, 3, 5, 10, 20, 50, 100]:
 5. 如果 k 個最近鄰居分類器所耗費的時間太久，考慮使用近似最佳鄰居分類演算法 (例如：[FLANN](http://www.cs.ubc.ca/research/flann/))
 6. 將表現最好的超參數記錄下來，而有個問題是，要不要把最好的超參數放回訓練資料集再訓練一次呢？答案是：請不要這樣做。因為當我們把驗證資料集放回訓練資料集後，最優參數的組合可能又會改變了。在實務上，請不要這麼做，你要做的是直接使用測試資料集來測試產生最佳超參數的模型表現，得到測試資料集的準確率後，把這個當成你的 k 個最近鄰居分類器的實際性能。
 
+## 延伸閱讀
+
+底下是一些額外的連結提供參考：
+
+[A Few Useful Things to Know about Machine Learning](http://homes.cs.washington.edu/~pedrod/papers/cacm12.pdf), 內容中的第六章和本次內容相關，但整份文章都值得閱讀
+
+[Recognizing and Learning Object Categories](http://people.csail.mit.edu/torralba/shortCourseRLOC/index.html), ICCV 2005 上關於物件分類的內容
 
