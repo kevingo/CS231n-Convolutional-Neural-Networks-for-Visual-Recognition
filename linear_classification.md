@@ -15,3 +15,4 @@
 
 ![img](https://raw.githubusercontent.com/kevingo/CS231n-Convolutional-Neural-Networks-for-Visual-Recognition/master/images/e1.gif)
 
+在上面的等式中，我們將每一張圖片的像素視為一個攤平的單一維度的向量，大小為 [D x 1]。**W** 矩陣 (大小為 [K x D]) 和 **b** 向量 (大小為 [K x 1]) 則視為該函數的參數。在 CIFAR-10 中，xi 就包含了第 i 張圖片的像素資訊，這張圖片被攤平為 [3072 x 1] 的向量，**W** 是 [10 x 3072]，而 **b** 是 [10 x 1]。因此，此函數的輸入是 3072 個數字 (原始像素值)，輸出為 10 個數字 (不同類別的分數)。參數 **W** 稱為**權重**，**b** 稱為**誤差向量**，因為它會影響輸出的數值，但不會直接和資料 xi 產生關聯。有時候，你會聽到人們常常混用**權重 (weight)** 和**參數 (parameters)**。
